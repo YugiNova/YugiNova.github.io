@@ -1,0 +1,77 @@
+/* dùng chung */
+
+body {
+    margin: 10% 40%;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 1em;
+}
+
+
+/* main */
+
+.main {
+    width: 100%;
+    height: auto;
+    background-color: #282A35;
+}
+
+
+/* title */
+
+.title {
+    width: 100%;
+    padding: 5%;
+}
+
+.title h4 {
+    color: rgb(205, 197, 197);
+    font-size: 1em;
+    margin: 0;
+    text-align: right;
+}
+
+
+/* screen */
+
+.screen {
+    background-color: transparent;
+    text-align: right;
+    padding: 5%;
+}
+
+.screen h1 {
+    color: white;
+    margin: 0;
+    overflow: hidden;
+    font-size: 5em;
+}
+
+
+/* keyboard */
+
+.cal-keyboard {
+    height: auto;
+    margin: 0;
+    padding: 5%;
+}
+
+.cal-keyboard .cal-button {
+    padding: 0;
+    height: 60px;
+}
+
+.cal-button button {
+    background-color: gray;
+    border: none;
+    width: 90%;
+    height: 90%;
+    margin: 5%;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+.cal-button button:hover {
+    background-color: #363127;
+}
