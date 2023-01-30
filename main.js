@@ -5,7 +5,8 @@ let arrButtonElement = [];
 let numFirst = 0,
     numLast = 0,
     result = 0,
-    lastCal = "";
+    lastCal = "",
+    endCal = false;
 
 function renderButton() {
     for (let i = 0; i < arrButton.length; i++) {
@@ -17,8 +18,18 @@ function renderButton() {
 }
 
 let clickNumber = (num) => {
-    numLast += num.toString();
-    document.querySelector('.screen h1').innerText = numLast;
+    if (endCal === true) {
+        numFirst = 0;
+        numLast = 0;
+        numLast += num.toString();
+        document.querySelector('.screen h1').innerText = numLast;
+        document.querySelector('.title h4').innerText = "";
+        endCal = false;
+    } else {
+        numLast += num.toString();
+        document.querySelector('.screen h1').innerText = numLast;
+    }
+
 
 }
 
@@ -30,7 +41,7 @@ let clickCalculation = (cal) => {
     document.querySelector('.screen h1').innerText = 0;
 }
 
-let getkResult = (cal) => {
+let getResult = (cal) => {
     switch (cal) {
         case "+":
             result = Number(numFirst) + Number(numLast);
@@ -51,6 +62,34 @@ let getkResult = (cal) => {
     return result;
 }
 
+let clickEqual = () => {
+    let finalCal = `${numFirst} ${lastCal} ${numLast}`;
+    document.querySelector('.screen h1').innerText = getResult(lastCal);
+    document.querySelector('.title h4').innerText = finalCal;
+    endCal = true;
+}
+
+let clickDelete = (del) => {
+
+    switch (del) {
+        case "<":
+            let numTemp = document.querySelector('.screen h1').innerText
+            numLast = numTemp.slice(0, numTemp.length - 1);
+            document.querySelector('.screen h1').innerText = numLast;
+            break;
+        case "C":
+            document.querySelector('.screen h1').innerText = 0;
+            document.querySelector('.title h4').innerText = null;
+            numFirst = 0,
+                numLast = 0,
+                result = 0,
+                lastCal = "";
+            break;
+        default:
+            break;
+    }
+}
+
 function Calculating(attr) {
     let data = attr.getAttribute("data");
     switch (data) {
@@ -63,15 +102,22 @@ function Calculating(attr) {
         case "7":
         case "8":
         case "9":
-            getNumber(data);
+        case ".":
+            clickNumber(data);
             break;
         case "+":
         case "-":
         case "x":
         case "/":
-            getCalculation(data);
+            clickCalculation(data);
             break;
-
+        case "=":
+            clickEqual();
+            break;
+        case "<":
+        case "C":
+            clickDelete(data);
+            break;
         default:
             document.querySelector('.screen h1').innerText = 0;
             break;
